@@ -1,0 +1,2 @@
+class OrderCRUD:
+    pass

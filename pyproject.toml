@@ -1,0 +1,24 @@
+[project]
+name = "fastapi-base"
+version = "0.1.0"
+description = "fastapi-base: medium/large FastAPI project skeleton"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.110",
+  "uvicorn[standard]>=0.27",
+  "gunicorn>=21.2",
+  "pydantic>=2.6",
+  "pydantic-settings>=2.2",
+  "SQLAlchemy>=2.0",
+  "alembic>=1.13",
+  "asyncpg>=0.29",
+  "asyncmy>=0.2",
+  "PyJWT>=2.8",
+  "loguru>=0.7",
+  "slowapi>=0.1",
+  "fastapi-cache2>=0.2",
+  "redis>=5.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

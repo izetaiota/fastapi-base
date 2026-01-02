@@ -1,0 +1,3 @@
+class ErrorCode:
+    INTERNAL_ERROR = "INTERNAL_ERROR"
+    RATE_LIMITED = "RATE_LIMITED"
