@@ -19,7 +19,7 @@ target_metadata = Base.metadata
 def _sync_url(async_url: str) -> str:
     return (
         async_url.replace("postgresql+asyncpg", "postgresql")
-        .replace("mysql+asyncmy", "mysql")
+        .replace("mysql+asyncmy", "mysql+pymysql")
         .replace("mysql+aiomysql", "mysql")
     )
 

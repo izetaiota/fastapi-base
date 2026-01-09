@@ -1,4 +1,7 @@
+import inspect
+
 from fastapi import FastAPI
+from fastapi.routing import APIRoute
 from slowapi import Limiter
 from slowapi.errors import RateLimitExceeded
 from slowapi.util import get_remote_address
@@ -26,6 +29,16 @@ def setup_rate_limit(app: FastAPI) -> None:
         )
 
     # Apply default rate limit to all routes; per-route overrides can be added later.
+    # NOTE: slowapi requires the endpoint signature to contain a "request" or "websocket" argument.
     for route in app.router.routes:
-        if hasattr(route, "endpoint"):
-            limiter.limit(settings.rate_limit)(route.endpoint)
+        if not isinstance(route, APIRoute):
+            continue
+
+        if route.name in {"openapi", "swagger_ui_html", "swagger_ui_redirect", "redoc_html"}:
+            continue
+
+        sig = inspect.signature(route.endpoint)
+        if "request" not in sig.parameters and "websocket" not in sig.parameters:
+            continue
+
+        limiter.limit(settings.rate_limit)(route.endpoint)
